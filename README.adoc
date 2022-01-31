@@ -65,5 +65,5 @@ In your Fortran Package Manager `fpm.toml` configuration file, add this repo as 
 
 ```toml
 [dependencies]
-error-handling = { git = "git@github.com:plevold/fortran-debug-utils.git", tag = "v0.0.1" }
+debug-utils = { git = "git@github.com:plevold/fortran-debug-utils.git", tag = "v0.0.1" }
 ```
