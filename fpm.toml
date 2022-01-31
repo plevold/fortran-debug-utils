@@ -1,0 +1,19 @@
+name = "debug-utils"
+version = "0.0.1"
+license = "MIT"
+author = "Pål Levold"
+maintainer = "paal@levold.net"
+copyright = "Copyright 2022, Pål Levold"
+
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+
+[install]
+library = false
+
+[dependencies]
+
+[dev-dependencies]
+

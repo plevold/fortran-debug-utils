@@ -1,0 +1,69 @@
+= Fortran Debug Utilities
+
+A collection of some utilities useful for debugging code.
+
+WARNING: These procedures are not intended to be included in production code!
+    Make sure you remove them once done with debugging
+
+== Example
+Use the `dbg` subroutine to write to stdout, even from pure and elemental procedures:
+
+// include:: directives does not render on GitHub 🙁
+[source,fortran]
+----
+module example_mod
+    implicit none
+
+    private
+    public some_pure_sub
+
+contains
+
+    pure subroutine some_pure_sub()
+
+        block
+            use debug_utils, only: dbg
+            call dbg('Hello from some_pure_sub' // new_line('c')  &
+                    // 'This can be useful for debugging pure procedures')
+        end block
+    end subroutine
+
+end module
+
+program example
+    use example_mod, only: some_pure_sub
+    implicit none
+
+    write(*,'(a)') 'Before pure sub'
+    call some_pure_sub
+    write(*,'(a)') 'After pure sub'
+end program
+----
+
+Note the use of a `block` which could be convenient to keep module use and the
+subroutine call close to each other.
+This outputs:
+
+----
+Before pure sub
+[debug]
+    Hello from some_pure_sub
+    This can be useful for debugging pure procedures
+After pure sub
+----
+
+
+== Building
+
+=== CMake
+CMake build is coming soon...
+
+
+=== Fortran Package Manager (FPM)
+
+In your Fortran Package Manager `fpm.toml` configuration file, add this repo as a dependency:
+
+```toml
+[dependencies]
+error-handling = { git = "git@github.com:plevold/fortran-debug-utils.git", tag = "v0.0.1" }
+```
